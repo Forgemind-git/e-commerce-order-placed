@@ -1,0 +1,226 @@
+{
+  "name": "Ecommerce order placed",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "# Ecommerce Order Placed Automation Using N8N\n\n## Recommend for micro and small scale Online store",
+        "height": 420,
+        "width": 980,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -80,
+        -160
+      ],
+      "typeVersion": 1,
+      "id": "2f86c3c5-791a-4700-bae8-d5f644a0f041",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "fromEmail": "info@forgemind.in",
+        "toEmail": "={{ $('Order Placed on site').item.json.body.customer_email }}",
+        "subject": "Order Placed!!",
+        "emailFormat": "text",
+        "text": "=Hi {{ $('Order Placed on site').item.json.body.customer_name+',\\n\\n' }}Your order has been successfully placed.{{ '\\n\\n'}}Regards,{{'\\n'}}Forgemind AI",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        440,
+        0
+      ],
+      "id": "2d43648f-3eae-4b33-9d49-1a52fa7c7dec",
+      "name": "info@forgemind.in",
+      "webhookId": "1207ac65-98fa-4f39-a44f-620baf2f7759",
+      "credentials": {
+        "smtp": {
+          "id": "alN15uiL3tEuZ8KV",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "phoneNumberId": "581877381684738",
+        "recipientPhoneNumber": "=91{{ $('Order Placed on site').item.json.body.customer_phone }}",
+        "template": "order_placed|en",
+        "components": {
+          "component": [
+            {
+              "type": "header",
+              "headerParameters": {
+                "parameter": [
+                  {
+                    "text": "={{ $('Order Placed on site').item.json.body.customer_name }}"
+                  }
+                ]
+              }
+            },
+            {
+              "bodyParameters": {
+                "parameter": [
+                  {
+                    "text": "={{ $('Order Placed on site').item.json.body.items[0].name }}"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        680,
+        0
+      ],
+      "id": "efd6a71d-adcf-41ca-80e3-4a5c52f11c6e",
+      "name": "Order placed message",
+      "webhookId": "d76d3990-df13-403a-a319-830c1703a20d",
+      "credentials": {
+        "whatsAppApi": {
+          "id": "lL1GgrllRKYWJV0E",
+          "name": "WhatsApp account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "34e8764c-4c4c-4ebe-8551-bba99500e8c0",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -40,
+        0
+      ],
+      "id": "b1984266-973a-4679-8e86-11d6a1e6cf5c",
+      "name": "Order Placed on site",
+      "webhookId": "34e8764c-4c4c-4ebe-8551-bba99500e8c0"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.body.customer_email }}",
+        "subject": "Order placed!!",
+        "emailType": "text",
+        "message": "=Hi {{ $json.body.customer_name+',\\n\\n' }}Your order has been successfully placed.{{ '\\n\\n'}}Regards,{{'\\n'}}Forgemind AI",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        180,
+        0
+      ],
+      "id": "07a07d75-f24c-4559-8aa4-63a90220d2e4",
+      "name": "Gmail",
+      "webhookId": "343bafd2-4f60-49cb-9eb1-f81fdfc0dbe6",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "hRlbenm3XLozqfhM",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "Order Placed on site": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n.srv805449.hstgr.cloud",
+            "user-agent": "WordPress/6.8.1; https://forgemind.tech",
+            "content-length": "306",
+            "accept": "*/*",
+            "accept-encoding": "deflate, gzip, br",
+            "content-type": "application/json",
+            "x-forwarded-for": "172.18.0.1",
+            "x-forwarded-host": "n8n.srv805449.hstgr.cloud",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "c71fbb99c8e6",
+            "x-real-ip": "172.18.0.1"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "order_id": 2169,
+            "status": "failed",
+            "total": "118.00",
+            "currency": "INR",
+            "payment_method": "razorpay",
+            "customer_email": "forgemind.business@gmail.com",
+            "customer_name": "Nishanth sathyamoorthy",
+            "customer_phone": "6383450870",
+            "items": [
+              {
+                "product_id": 2162,
+                "name": "Sample",
+                "quantity": 1,
+                "subtotal": "100",
+                "total": "100"
+              }
+            ]
+          },
+          "webhookUrl": "https://n8n.srv805449.hstgr.cloud/webhook/34e8764c-4c4c-4ebe-8551-bba99500e8c0",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "info@forgemind.in": {
+      "main": [
+        [
+          {
+            "node": "Order placed message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Order Placed on site": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail": {
+      "main": [
+        [
+          {
+            "node": "info@forgemind.in",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "c1fe87f9-a05f-4f62-ba83-7a13985ec938",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "030862b1dcaff3ff9cb8f16544487a6b16cf430e1deb04f332ab7722f5f563bd"
+  },
+  "id": "ertbSKWuEj6SoS6R",
+  "tags": []
+}
