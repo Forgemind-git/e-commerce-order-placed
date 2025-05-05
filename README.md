@@ -13,7 +13,7 @@ This repository is part of the [ForgeMindAI](https://www.youtube.com/@ForgeMindA
 
 ## 🎥 Watch the Tutorial
 
-Check out the full tutorial on the ForgeMindAI YouTube channel: [[YouTube Link Here](https://youtu.be/ZqWQwbzvrac)]
+Check out the full tutorial on the ForgeMindAI YouTube channel: [[YouTube Link Here](https://youtu.be/TA1QBe2uGLY?si=yeGhlBsefkz6cpqS)]
 
 ## To import the workflow to your n8n
 * Go to the 3 dots in the top right corner after creating a workflow.
